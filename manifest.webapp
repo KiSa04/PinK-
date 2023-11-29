@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "name": "PinK!",
+  "description": "Pinterest client for KaiOS",
+  "type": "privileged",
+  "csp": "default-src *; script-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline'",
+  "launch_path": "/kinterest-index.html",
+  "icons": {
+    "56": "/images/x56.png",
+    "84": "/images/x84.png",
+    "112": "/images/x112.png"
+  },
+  "developer": {
+    "name": "Daniel",
+    "url": ""
+  },
+  "dependencies": {
+		"ads-sdk": "1.5.8"
+	},
+  "categories": [
+    "entertainment",
+    "book/reference"
+  ],
+  "locales": {
+    "en-US": {
+      "name": "PinK!",
+      "subtitle": "Pinterest client for KaiOS",
+      "description": "Discover new ideas and get inspired in the PinK! app"
+    }
+  },
+  "default_locale": "en-US",
+  "origin": "app://kaios.pink.org",
+  "permissions": {
+    "systemXHR": {
+      "description": "Required to bypass CORS limitations."
+    },
+    "mobiledata": {},
+    "wifidata": {}
+  }
+}
