@@ -1,4 +1,4 @@
-#PinK - Pinterest Client for KaiOS
+# PinK - Pinterest Client for KaiOS
 
 Overview
 
