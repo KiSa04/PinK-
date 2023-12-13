@@ -2,14 +2,12 @@ let usersAtIndex1;
 let unread;
 let contenttxt;
 let curr;
-const urlParams = new URLSearchParams(window.location.search);
 
+const urlParams = new URLSearchParams(window.location.search);
 const sourceUrlParam = urlParams.get('l');
 
 function moveFocusDown(event) {
     var divs = document.getElementById('image-container').getElementsByTagName('div');
-
-    // Encontre o div atualmente focado
     var focusedIndex = -1;
     for (var i = 0; i < divs.length; i++) {
         if (divs[i].classList.contains('focused')) {
@@ -17,25 +15,24 @@ function moveFocusDown(event) {
             break;
         }
     }
-
     if (focusedIndex !== -1) {
         divs[focusedIndex].classList.remove('focused');
     }
-var nextIndex;
-	if (event.key === 'ArrowDown'){
-		nextIndex = (focusedIndex + 2) % divs.length;
+    var nextIndex;
+    if (event.key === 'ArrowDown'){ //change selected chat focus
+	    nextIndex = (focusedIndex + 2) % divs.length;
 	}
-	else if (event.key === 'ArrowUp'){
+    else if (event.key === 'ArrowUp'){
 		nextIndex = (focusedIndex - 2) % divs.length;
 		if (nextIndex < 0){
 			nextIndex = divs.length -2;
 		}
-	}
+    }
 
     divs[nextIndex].classList.add('focused');
 }
 
-document.addEventListener("keydown", (function(e) {
+    document.addEventListener("keydown", (function(e) {
         switch (e.key) {
 			case 'SoftRight':
 			if(document.getElementById('image-container').style.display == 'none')
@@ -51,8 +48,8 @@ document.addEventListener("keydown", (function(e) {
 			}
 			break;
 			case 'ArrowDown':
-			if(document.getElementsByClassName('input-container')[0].style.display == '')
-			{
+			if(document.getElementsByClassName('input-container')[0].style.display == '') //check if the chat is hidden, 
+			{									      //so you don't change focus inside the chat
 			moveFocusDown(e);
 			}
 			break;
@@ -146,7 +143,7 @@ savedCookies = sourceUrlParam;
                                     if (xhr.status === 200) {
 										/*if (window.opener) {
   mainWindow= window.opener;
-}*/
+}*/ 
 					let firstData = JSON.parse(xhr.responseText).resource_response.data;
 					usersAtIndex1 = firstData.map(item => (item.users && item.users.length > 1) ? item.users[1] : undefined);
 					unread = firstData.map(item => item.unread);
@@ -154,7 +151,7 @@ savedCookies = sourceUrlParam;
 					console.log(usersAtIndex1);
 					const container = document.getElementById('image-container');
 					usersAtIndex1.forEach((user, index)=> {
-  // Create an <img> element
+						
 const div = document.createElement('div');
 const div1 = document.createElement('div');
   const imgElement = document.createElement('img');
