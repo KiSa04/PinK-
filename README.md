@@ -1,15 +1,15 @@
-PinK - Pinterest Client for KaiOS
+#PinK - Pinterest Client for KaiOS
 Overview
 
 PinK is a Pinterest client designed specifically for KaiOS, providing a seamless experience for users on KaiOS-enabled devices. This lightweight application offers essential Pinterest features tailored to the KaiOS environment.
 Current Functions
 
-    See Pins: Explore a rich collection of Pins tailored to your interests.
-    Save Images: Save your favorite images for later reference.
+    See Pins
+    Save Images
     Pinterest AI Tracking: Accurate recommendations based on your clicks and shares, enhancing your Pinterest experience.
-    Share Pins: Easily share inspiring Pins with friends and followers.
+    Share Pins: Easily share Pins with friends and followers.
     Send Messages: Connect with others through private messages.
-    Read Messages and Pins: Stay engaged with the latest updates from your connections.
+    Read Messages and Pins
 
 Updates
 Fixed
@@ -21,8 +21,8 @@ Fixed
 To-Do
 
     Create Boards: Organize your Pins by creating custom boards.
-    Search Pins: Find inspiration quickly with a powerful search functionality.
-    Browse User Profiles: Explore other users' profiles to discover more content.
-    Follow Pin Poster: Stay connected with your favorite Pin posters for the latest updates.
-    See Pin Poster: View the profile of the creator behind your favorite Pins.
+    Search Pins
+    Browse User Profiles: Explore other users' profiles 
+    Follow Pin Poster
+    See Pin Poster
 
