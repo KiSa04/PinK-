@@ -1,34 +1,28 @@
-# PinK-
-Pinterest client for KaiOS
+PinK - Pinterest Client for KaiOS
+Overview
 
+PinK is a Pinterest client designed specifically for KaiOS, providing a seamless experience for users on KaiOS-enabled devices. This lightweight application offers essential Pinterest features tailored to the KaiOS environment.
+Current Functions
 
-Current Functions:
+    See Pins: Explore a rich collection of Pins tailored to your interests.
+    Save Images: Save your favorite images for later reference.
+    Pinterest AI Tracking: Accurate recommendations based on your clicks and shares, enhancing your Pinterest experience.
+    Share Pins: Easily share inspiring Pins with friends and followers.
+    Send Messages: Connect with others through private messages.
+    Read Messages and Pins: Stay engaged with the latest updates from your connections.
 
+Updates
+Fixed
 
--> See Pins
+    Login Redirection: Improved user experience by handling failed logins with a clear error message and redirecting back to the login page.
 
--> Save Images
+    URL Parsing: Optimized code efficiency by addressing issues with URL parsing, resulting in smoother performance with fewer API requests.
 
--> Pinterest AI tracking clicks and shares to get accurate recommendations
+To-Do
 
--> Share Pins
+    Create Boards: Organize your Pins by creating custom boards.
+    Search Pins: Find inspiration quickly with a powerful search functionality.
+    Browse User Profiles: Explore other users' profiles to discover more content.
+    Follow Pin Poster: Stay connected with your favorite Pin posters for the latest updates.
+    See Pin Poster: View the profile of the creator behind your favorite Pins.
 
--> Send messages
-
--> Read messages and Pins
-
-
-Fixed:
-
--> With failed login, a redirect was made to a black page (now it prompts the error message and redirects back to login)
-
--> Bad parsing of urls led to an unefficient code (it now runs much more smoothly, with fewer requests to the API)
-
-
-ToDo:
-
--> Create Boards
--> Search Pins
--> Browse users profile
--> Follow Pin Poster
--> See Pin Poster
