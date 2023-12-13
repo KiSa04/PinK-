@@ -3,6 +3,7 @@
 Overview
 
 PinK is a Pinterest client designed specifically for KaiOS, providing a seamless experience for users on KaiOS-enabled devices. This lightweight application offers essential Pinterest features tailored to the KaiOS environment.
+
 Current Functions
 
     See Pins
@@ -12,7 +13,6 @@ Current Functions
     Send Messages: Connect with others through private messages.
     Read Messages and Pins
 
-Updates
 Fixed
 
     Login Redirection: Improved user experience by handling failed logins with a clear error message and redirecting back to the login page.
