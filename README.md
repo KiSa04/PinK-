@@ -25,4 +25,7 @@ To-Do
     Browse User Profiles: Explore other users' profiles 
     Follow Pin Poster
     See Pin Poster
+    Comment Pins
+    See Pin comments
+    
 
