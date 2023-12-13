@@ -4,11 +4,9 @@ let contenttxt;
 let curr;
 const urlParams = new URLSearchParams(window.location.search);
 
-// Get a specific parameter value by name
 const sourceUrlParam = urlParams.get('l');
 
 function moveFocusDown(event) {
-    // Obtenha todos os elementos div dentro do contêiner
     var divs = document.getElementById('image-container').getElementsByTagName('div');
 
     // Encontre o div atualmente focado
@@ -20,12 +18,10 @@ function moveFocusDown(event) {
         }
     }
 
-    // Remova a classe focused do div atualmente focado
     if (focusedIndex !== -1) {
         divs[focusedIndex].classList.remove('focused');
     }
 var nextIndex;
-    // Calcule o índice do próximo div
 	if (event.key === 'ArrowDown'){
 		nextIndex = (focusedIndex + 2) % divs.length;
 	}
@@ -36,7 +32,6 @@ var nextIndex;
 		}
 	}
 
-    // Adicione a classe focused ao próximo div
     divs[nextIndex].classList.add('focused');
 }
 
@@ -164,15 +159,11 @@ const div = document.createElement('div');
 const div1 = document.createElement('div');
   const imgElement = document.createElement('img');
 
-  // Set the src attribute using the user's image_large_url
   imgElement.src = user.image_large_url;
-
-  // Optionally, you can set other attributes or styles for the <img> element
   imgElement.alt = 'User Image';
   //imgElement.style.font-size = '10px'; // Adjust the width as needed
 
   var nameElement = document.createElement('span');
-    ; // Replace 'name' with the actual property name
 if (unread[index] === 0) {
  nameElement.textContent = user.full_name
 }
@@ -181,7 +172,7 @@ else{
   nameElement.textContent = `${user.full_name} (${unread[index]})`
 }
     var usernameElement = document.createElement('span');
-    usernameElement.textContent = user.username; // Replace 'username' with the actual property name
+    usernameElement.textContent = user.username; 
     usernameElement.style.fontSize = '10px';
 	
     div1.appendChild(nameElement);
@@ -222,29 +213,23 @@ xhr.onreadystatechange = function () {
 messages.forEach((item) => {
 var isMe = (item.sender.id == div.getAttribute('data-custom'));
 
-if (isMe === true)
+if (isMe === true) 
 {
 	console.log("not sent by me")
-	if (item.pin !== null) {
-    // If the message has a non-null pin, map image_signature
+	if (item.pin !== null) { //check if message is a pin or a text and create an element based on it
     chats.push(`img ${item.pin.image_signature}`);
   } else {
-    // If the message has a null pin, map text
     chats.push(`txt ${item.text}`);
   }
 }
 else{
   if (item.pin !== null) {
-    // If the message has a non-null pin, map image_signature
     chats.push(`limg ${item.pin.image_signature}`);
   } else {
-    // If the message has a null pin, map text
     chats.push(`ltxt ${item.text}`);
   }
 }
 });
-
-            // Display the messages in the chat container
             displayMessages(chats);
 		
     }
@@ -285,7 +270,6 @@ function displayMessages(messages) {
         var messageElement;
 		a--;
         if (message.includes('img')) {
-            // If the message contains 'img', create a div with an image
             messageElement = document.createElement('div');
             messageElement.className = 'message';
             if (message.includes('limg')) {messageElement.id = 'sent_by_other';}
@@ -301,7 +285,7 @@ function displayMessages(messages) {
             messageElement.className = 'message';
 			imgElement.className = 'txt_chat';
 			if (message.includes('ltxt')) {messageElement.id = 'sent_by_other';}
-            imgElement.textContent = extractTextContent(message); // Extract text content from the message
+            imgElement.textContent = extractTextContent(message); 
 			messageElement.appendChild(imgElement);
         }
 
@@ -310,12 +294,10 @@ function displayMessages(messages) {
 		
 }
 
-// Extract image source from the 'img' message
 function extractImageSource(message) {
-    return message.split(' ')[1]; // Assuming the format is 'img <image_source>'
+    return message.split(' ')[1]; 
 }
 
-// Extract text content from the 'txt' message
 function extractTextContent(message) {
-    return message.split(' ')[1]; // Assuming the format is 'txt <text_content>'
+    return message.split(' ')[1]; 
 }
