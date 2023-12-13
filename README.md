@@ -16,8 +16,7 @@ Current Functions
 Fixed
 
     Login Redirection: Improved user experience by handling failed logins with a clear error message and redirecting back to the login page.
-
-    URL Parsing: Optimized code efficiency by addressing issues with URL parsing, resulting in smoother performance with fewer API requests.
+    URL Parsing: Optimized code efficiency by addressing issues with URL parsing, resulting in a smoother performance with fewer API requests.
 
 To-Do
 
