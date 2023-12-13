@@ -1,0 +1,2 @@
+let chatWindow;
+let mainWindow;

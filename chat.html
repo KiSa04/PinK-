@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pinterest Chat</title>
+<script src = "chat.js"></script> 
+<script src = "variables.js"></script> 
+<link rel = "stylesheet" href = "chat.css">
+</head>
+<body>
+
+  <div class="chat-container">
+    <div class="chat-header">
+      PinK! Chat
+    </div>
+    <div class="chat-body" id="chat-body">
+      <!-- Chat messages will be displayed here -->
+    </div>
+    <!-- New container for images -->
+    <div class="image-container" id="image-container">
+      <!-- Images will be displayed here -->
+    </div>
+	<div class="input-container">
+      <input type="text" id="message-input" placeholder="Type your message...">
+      <button class="send-button" onclick="sendMessage()">✈️</button>
+    </div>
+	<div class="softkey"><div class="softkey-left">...</div><div class="softkey-center">💬</div><div class="softkey-right">🚪</div></div>
+    
+  </div>
+
+  <script>
+    function sendMessage() {
+      var messageInput = document.getElementById('message-input');
+      var chatBody = document.getElementById('chat-body');
+
+      if (messageInput.value.trim() !== '') {
+        var message = document.createElement('div');
+        message.className = 'message user-message';
+        message.textContent = messageInput.value;
+        chatBody.appendChild(message);
+
+        // You can add logic here to handle the response from the other user or server.
+
+        messageInput.value = '';
+        messageInput.focus();
+      }
+    }
+
+   
+  </script>
+
+</body>
+</html>
