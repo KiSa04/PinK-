@@ -4,14 +4,11 @@ let contenttxt;
 let curr;
 const urlParams = new URLSearchParams(window.location.search);
 
-// Get a specific parameter value by name
 const sourceUrlParam = urlParams.get('l');
 
 function moveFocusDown(event) {
-    // Obtenha todos os elementos div dentro do contêiner
-    var divs = document.getElementById('image-container').getElementsByTagName('div');
 
-    // Encontre o div atualmente focado
+    var divs = document.getElementById('image-container').getElementsByTagName('div');
     var focusedIndex = -1;
     for (var i = 0; i < divs.length; i++) {
         if (divs[i].classList.contains('focused')) {
@@ -20,12 +17,10 @@ function moveFocusDown(event) {
         }
     }
 
-    // Remova a classe focused do div atualmente focado
     if (focusedIndex !== -1) {
         divs[focusedIndex].classList.remove('focused');
     }
 var nextIndex;
-    // Calcule o índice do próximo div
 	if (event.key === 'ArrowDown'){
 		nextIndex = (focusedIndex + 2) % divs.length;
 	}
@@ -36,7 +31,6 @@ var nextIndex;
 		}
 	}
 
-    // Adicione a classe focused ao próximo div
     divs[nextIndex].classList.add('focused');
 }
 
@@ -167,15 +161,13 @@ const div = document.createElement('div');
 const div1 = document.createElement('div');
   const imgElement = document.createElement('img');
 
-  // Set the src attribute using the user's image_large_url
   imgElement.src = user.image_large_url;
 
-  // Optionally, you can set other attributes or styles for the <img> element
   imgElement.alt = 'User Image';
-  //imgElement.style.font-size = '10px'; // Adjust the width as needed
+  //imgElement.style.font-size = '10px';
 
   var nameElement = document.createElement('span');
-    ; // Replace 'name' with the actual property name
+   
 if (unread[index] === 0) {
  nameElement.textContent = user.full_name
 }
@@ -184,7 +176,7 @@ else{
   nameElement.textContent = `${user.full_name} (${unread[index]})`
 }
     var usernameElement = document.createElement('span');
-    usernameElement.textContent = user.username; // Replace 'username' with the actual property name
+    usernameElement.textContent = user.username;
     usernameElement.style.fontSize = '10px';
 	
     div1.appendChild(nameElement);
@@ -320,5 +312,5 @@ function extractImageSource(message) {
 
 // Extract text content from the 'txt' message
 function extractTextContent(message) {
-    return message.replace(message.split(' ')[1], ""); // Assuming the format is 'txt <text_content>'
+    return message.replace(message.split(' ')[1], ""); // Assuming the format is 'txt <text_content>' 
 } //error handling multiple words
