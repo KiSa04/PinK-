@@ -26,7 +26,7 @@ let t = {
                         n.setRequestHeader(e, r[e])
                     }), n.onreadystatechange = function() {
                         if (4 === n.readyState) {
-let email = generateRandomString(20);
+                            let email = generateRandomString(20);
                             let t = n.responseText.match(/"rresp","(.+?)"/),
                                 o = t ? t[1] : null,
                                 s = `email=${email}%40gmail.com&username=&password=PinK!App&first_name=PinK!&last_name=&country=PT&locale=pt-PT&&birthday=1072915200&recaptcha_v3_token=${o}`;
