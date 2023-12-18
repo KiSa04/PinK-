@@ -312,5 +312,5 @@ function extractImageSource(message) {
 
 // Extract text content from the 'txt' message
 function extractTextContent(message) {
-    return message.replace(message.split(' ')[1], ""); // Assuming the format is 'txt <text_content>' 
+    return message.replace(message.split(' ')[0], ""); // Assuming the format is 'txt <text_content>' 
 } //error handling multiple words
