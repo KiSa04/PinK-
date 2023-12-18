@@ -230,7 +230,7 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
                                     4 === t.readyState && (401 === t.status || 429 === t.status ? (console.log(t.responseText), indexedDB.deleteDatabase("CookieDB----1"), alert(JSON.parse(t.responseText).message), window.location.href = "register.html") : (console.log(t.status), e(t.getResponseHeader("Set-Cookie") || "")))
                                 }
                                 else{
-                                    4 === t.readyState && (401 === t.status || 429 === t.status ? (console.log(t.responseText), alert(JSON.parse(t.responseText).message), window.location.href = "login.html") : (console.log(t.status), window.location.href = `kinterest-index.html?v=1&?${login_data}`))
+                                    4 === t.readyState && (401 === t.status || 429 === t.status ? (console.log(t.responseText), alert(JSON.parse(t.responseText).message), window.location.href = "login.html") : (console.log(t.status), indexedDB.deleteDatabase("CookieDB----1"), window.location.href = `kinterest-index.html?v=1&?${login_data}`))
                                 }
                             }, t.send(i)
                         }
