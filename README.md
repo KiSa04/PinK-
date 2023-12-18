@@ -19,12 +19,12 @@ Fixed
 
     Login Redirection: Improved user experience by handling failed logins with a clear error message and redirecting back to the login page.
     URL Parsing: Optimized code efficiency by addressing issues with URL parsing, resulting in a smoother performance with fewer API requests.
-    Fixed multiple words texts appearing as a single word.
+    multiple words texts appearing as a single word.
+    Save local account data when redirecting to login instead of deleting the database
+    Add a query param to the login redirect, to be checked in app.js so in case of a login error redirect back to login.html, in case of register error, redirect back to register.html
 
 To-Do
 
-    Save local account data when redirecting to login instead of deleting the database (perhaps storing it on a different database?)
-    Add a query param to the login redirect, to be checked in app.js so in case of a login error redirect back to login.html, in case of register error, redirect back to register.html
     Create Boards: Organize your Pins by creating custom boards.
     Search Pins
     Browse User Profiles: Explore other users' profiles 
