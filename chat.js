@@ -2,12 +2,16 @@ let usersAtIndex1;
 let unread;
 let contenttxt;
 let curr;
-
 const urlParams = new URLSearchParams(window.location.search);
+
+// Get a specific parameter value by name
 const sourceUrlParam = urlParams.get('l');
 
 function moveFocusDown(event) {
+    // Obtenha todos os elementos div dentro do contêiner
     var divs = document.getElementById('image-container').getElementsByTagName('div');
+
+    // Encontre o div atualmente focado
     var focusedIndex = -1;
     for (var i = 0; i < divs.length; i++) {
         if (divs[i].classList.contains('focused')) {
@@ -15,24 +19,28 @@ function moveFocusDown(event) {
             break;
         }
     }
+
+    // Remova a classe focused do div atualmente focado
     if (focusedIndex !== -1) {
         divs[focusedIndex].classList.remove('focused');
     }
-    var nextIndex;
-    if (event.key === 'ArrowDown'){ //change selected chat focus
-	    nextIndex = (focusedIndex + 2) % divs.length;
+var nextIndex;
+    // Calcule o índice do próximo div
+	if (event.key === 'ArrowDown'){
+		nextIndex = (focusedIndex + 2) % divs.length;
 	}
-    else if (event.key === 'ArrowUp'){
+	else if (event.key === 'ArrowUp'){
 		nextIndex = (focusedIndex - 2) % divs.length;
 		if (nextIndex < 0){
 			nextIndex = divs.length -2;
 		}
-    }
+	}
 
+    // Adicione a classe focused ao próximo div
     divs[nextIndex].classList.add('focused');
 }
 
-    document.addEventListener("keydown", (function(e) {
+function lol(e) {
         switch (e.key) {
 			case 'SoftRight':
 			if(document.getElementById('image-container').style.display == 'none')
@@ -40,7 +48,8 @@ function moveFocusDown(event) {
 				console.log("here");
 				document.getElementById('image-container').style.display = 'flex';
 				document.getElementsByClassName('input-container')[0].style.display = 'none';
-				document.getElementById('chat-body').innerHTML= ''
+				document.getElementById('chat-body').innerHTML= '';
+				
 			}
 			else{
 				console.log("there");
@@ -48,13 +57,13 @@ function moveFocusDown(event) {
 			}
 			break;
 			case 'ArrowDown':
-			if(document.getElementsByClassName('input-container')[0].style.display == '') //check if the chat is hidden, 
-			{									      //so you don't change focus inside the chat
+			if(document.getElementsByClassName('input-container')[0].style.display == '' || document.getElementsByClassName('input-container')[0].style.display == 'none')
+			{
 			moveFocusDown(e);
 			}
 			break;
 			case 'ArrowUp':
-			if(document.getElementsByClassName('input-container')[0].style.display == '')
+			if(document.getElementsByClassName('input-container')[0].style.display == '' || document.getElementsByClassName('input-container')[0].style.display == 'none')
 			{
 			moveFocusDown(e);
 			}
@@ -63,7 +72,7 @@ function moveFocusDown(event) {
 			if(document.getElementsByClassName('input-container')[0].style.display == 'flex')
 			{
 				var url2 = `https://www.pinterest.pt/resource/ConversationMessagesResource/create/`;
-				contenttxt = `source_url=%2F&data=%7B%22options%22%3A%7B%22conversation_id%22%3A%22${curr}%22%2C%22text%22%3A%22${document.getElementById('message-input').value}%22%7D%2C%22context%22%3A%7B%7D%7D`;
+				contenttxt = `source_url=%2F&data=%7B%22options%22%3A%7B%22conversation_id%22%3A%22${curr}%22%2C%22text%22%3A%22${encodeURIComponent(document.getElementById('message-input').value)}%22%7D%2C%22context%22%3A%7B%7D%7D`;
 					var xhr = new XMLHttpRequest({
                                 mozSystem: true
                             });
@@ -110,7 +119,9 @@ function moveFocusDown(event) {
 				}
 			break;
 		}
-}))
+}
+
+document.addEventListener("keydown", lol);
 const apiUrl = 'https://www.pinterest.pt/resource/ConversationsResource/get/?source_url=/pin//&data={%22options%22:{%22field_set_key%22:%22default%22},%22context%22:{}}&_=';
 
 savedCookies = sourceUrlParam;
@@ -143,7 +154,7 @@ savedCookies = sourceUrlParam;
                                     if (xhr.status === 200) {
 										/*if (window.opener) {
   mainWindow= window.opener;
-}*/ 
+}*/
 					let firstData = JSON.parse(xhr.responseText).resource_response.data;
 					usersAtIndex1 = firstData.map(item => (item.users && item.users.length > 1) ? item.users[1] : undefined);
 					unread = firstData.map(item => item.unread);
@@ -151,16 +162,20 @@ savedCookies = sourceUrlParam;
 					console.log(usersAtIndex1);
 					const container = document.getElementById('image-container');
 					usersAtIndex1.forEach((user, index)=> {
-						
+  // Create an <img> element
 const div = document.createElement('div');
 const div1 = document.createElement('div');
   const imgElement = document.createElement('img');
 
+  // Set the src attribute using the user's image_large_url
   imgElement.src = user.image_large_url;
+
+  // Optionally, you can set other attributes or styles for the <img> element
   imgElement.alt = 'User Image';
   //imgElement.style.font-size = '10px'; // Adjust the width as needed
 
   var nameElement = document.createElement('span');
+    ; // Replace 'name' with the actual property name
 if (unread[index] === 0) {
  nameElement.textContent = user.full_name
 }
@@ -169,7 +184,7 @@ else{
   nameElement.textContent = `${user.full_name} (${unread[index]})`
 }
     var usernameElement = document.createElement('span');
-    usernameElement.textContent = user.username; 
+    usernameElement.textContent = user.username; // Replace 'username' with the actual property name
     usernameElement.style.fontSize = '10px';
 	
     div1.appendChild(nameElement);
@@ -210,23 +225,29 @@ xhr.onreadystatechange = function () {
 messages.forEach((item) => {
 var isMe = (item.sender.id == div.getAttribute('data-custom'));
 
-if (isMe === true) 
+if (isMe === true)
 {
 	console.log("not sent by me")
-	if (item.pin !== null) { //check if message is a pin or a text and create an element based on it
+	if (item.pin !== null) {
+    // If the message has a non-null pin, map image_signature
     chats.push(`img ${item.pin.image_signature}`);
   } else {
+    // If the message has a null pin, map text
     chats.push(`txt ${item.text}`);
   }
 }
 else{
   if (item.pin !== null) {
+    // If the message has a non-null pin, map image_signature
     chats.push(`limg ${item.pin.image_signature}`);
   } else {
+    // If the message has a null pin, map text
     chats.push(`ltxt ${item.text}`);
   }
 }
 });
+
+            // Display the messages in the chat container
             displayMessages(chats);
 		
     }
@@ -267,6 +288,7 @@ function displayMessages(messages) {
         var messageElement;
 		a--;
         if (message.includes('img')) {
+            // If the message contains 'img', create a div with an image
             messageElement = document.createElement('div');
             messageElement.className = 'message';
             if (message.includes('limg')) {messageElement.id = 'sent_by_other';}
@@ -282,7 +304,7 @@ function displayMessages(messages) {
             messageElement.className = 'message';
 			imgElement.className = 'txt_chat';
 			if (message.includes('ltxt')) {messageElement.id = 'sent_by_other';}
-            imgElement.textContent = extractTextContent(message); 
+            imgElement.textContent = extractTextContent(message); // Extract text content from the message
 			messageElement.appendChild(imgElement);
         }
 
@@ -291,10 +313,12 @@ function displayMessages(messages) {
 		
 }
 
+// Extract image source from the 'img' message
 function extractImageSource(message) {
-    return message.split(' ')[1]; 
+    return message.split(' ')[1]; // Assuming the format is 'img <image_source>'
 }
 
+// Extract text content from the 'txt' message
 function extractTextContent(message) {
-    return message.split(' ')[1]; 
-}
+    return message.replace(message.split(' ')[1], ""); // Assuming the format is 'txt <text_content>'
+} //error handling multiple words
