@@ -1,11 +1,12 @@
 var request;
-let savedCookies, ImgUrls, login_data, AllUrls, newWindow, isOK, plsgod, infoH, highlightedIndex = 0,
+let savedCookies, type, ImgUrls, login_data, AllUrls, newWindow, isOK, plsgod, infoH, highlightedIndex = 0,
     leftColumnHeight = 0,
     rightColumnHeight = 0,
     pos = 0,
     AllPins = [],
     cook1 = 0,
     helpme = 0,
+    is_verify = 0,
     possss = 0;
 
 function saveImgFromUrl(e) {
@@ -174,6 +175,8 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
             }
         })
     })), e.postMessage("start");
+
+    type = t("type");
     var o = t("email"),
         n = t("pass"),
         s = localStorage.getItem("dbVersion") || 3;
@@ -222,7 +225,13 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
                             Object.keys(o).forEach((e => {
                                 t.setRequestHeader(e, o[e])
                             })), t.onreadystatechange = function() {
-                                4 === t.readyState && (401 === t.status || 429 === t.status ? (console.log(t.responseText), indexedDB.deleteDatabase("CookieDB----1"), alert(JSON.parse(t.responseText).message), window.location.href = "register.html") : (console.log(t.status), e(t.getResponseHeader("Set-Cookie") || "")))
+                                if (!type)
+                                {
+                                    4 === t.readyState && (401 === t.status || 429 === t.status ? (console.log(t.responseText), indexedDB.deleteDatabase("CookieDB----1"), alert(JSON.parse(t.responseText).message), window.location.href = "register.html") : (console.log(t.status), e(t.getResponseHeader("Set-Cookie") || "")))
+                                }
+                                else{
+                                    4 === t.readyState && (401 === t.status || 429 === t.status ? (console.log(t.responseText), alert(JSON.parse(t.responseText).message), window.location.href = "login.html") : (console.log(t.status), window.location.href = `kinterest-index.html?v=1&?${login_data}`))
+                                }
                             }, t.send(i)
                         }
                     }, s.send(r)
@@ -230,6 +239,8 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
             }, t.send()
         }
     }
+    if (!type)
+        {
     o && (s = 4, localStorage.setItem("dbVersion", s)), (request = indexedDB.open("CookieDB----1", s)).onupgradeneeded = function(e) {
         var t = e.target.result;
         console.log("Atualizando o esquema do banco de dados."), t.objectStoreNames.contains("Login") || o ? (t.createObjectStore("Login", {
@@ -312,6 +323,11 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
     }, request.onerror = function(e) {
         console.error("Erro ao abrir o banco de dados:", e.target.errorCode)
     };
+    }
+    else{
+        login_data = `username_or_email=${encodeURIComponent(o)}&password=${encodeURIComponent(n)}`;
+        r();
+    }
     let i, l = document.getElementById("overlay");
 
     function a() {
@@ -367,7 +383,16 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
                         top: o,
                         behavior: "smooth"
                     })
-                } else indexedDB.deleteDatabase("CookieDB----1"), window.location.href = "login.html";
+                } else{
+                    if (is_verify == 0)
+                    {
+                        alert("Warning: your local account will log out");
+                        is_verify = 1;
+                    }
+                    else {
+                       window.location.href = "login.html";
+                    }
+                }
                 break;
             case "Enter":
                 if ("none" == document.getElementById("pin-container").style.display);
