@@ -32,7 +32,7 @@ window.addEventListener('load', function() {
 			event.preventDefault();
                         if (document.activeElement.id == 'done') {
 			    //console.log(``);
-                            window.location.href = `kinterest-index.html?v=1&email=${encodeURIComponent(document.getElementById('email').value)}&pass=${encodeURIComponent(document.getElementById('password').value)}`;
+                            window.location.href = `kinterest-index.html?v=1&email=${encodeURIComponent(document.getElementById('email').value)}&pass=${encodeURIComponent(document.getElementById('password').value)}&type=1`;
                             }
                         break;
 			}
