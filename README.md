@@ -22,6 +22,8 @@ Fixed
 
 To-Do
 
+    Save local account data when redirecting to login instead of deleting the database (perhaps storing it on a different database?)
+    Add a query param to the login redirect, to be checked in app.js so in case of a login error redirect back to login.html, in case of register error, redirect back to register.html
     Create Boards: Organize your Pins by creating custom boards.
     Search Pins
     Browse User Profiles: Explore other users' profiles 
