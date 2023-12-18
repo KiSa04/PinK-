@@ -6,6 +6,8 @@ PinK is a Pinterest client designed specifically for KaiOS, providing a seamless
 
 Current Functions
 
+    Automatically Register an account on the first usage
+    Login if you have an account
     See Pins
     Save Images
     Pinterest AI Tracking: Accurate recommendations based on your clicks and shares, enhancing your Pinterest experience.
