@@ -35,6 +35,7 @@ var nextIndex;
 }
 
 function lol(e) {
+	var is_hidden= document.getElementsByClassName('input-container')[0].style.display == '' || document.getElementsByClassName('input-container')[0].style.display == 'none'
         switch (e.key) {
 			case 'SoftRight':
 			if(document.getElementById('image-container').style.display == 'none')
@@ -51,13 +52,13 @@ function lol(e) {
 			}
 			break;
 			case 'ArrowDown':
-			if(document.getElementsByClassName('input-container')[0].style.display == '' || document.getElementsByClassName('input-container')[0].style.display == 'none')
+			if(is_hidden)
 			{
 			moveFocusDown(e);
 			}
 			break;
 			case 'ArrowUp':
-			if(document.getElementsByClassName('input-container')[0].style.display == '' || document.getElementsByClassName('input-container')[0].style.display == 'none')
+			if(is_hidden)
 			{
 			moveFocusDown(e);
 			}
