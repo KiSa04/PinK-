@@ -7,20 +7,31 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/*.pin[data-src],
+.pin img[data-src] {
+    visibility: hidden
+}
 
+.pin img[data-src] + *{
+    visibility: hidden
+}*/
+.softkey-r{
+    text-align: left;
+    margin-left: 90px;
+}
 body {
     top: 0;
     font-family: 'Great Vibes', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #fff;
-    color: #333; /* Cor do texto padrão */
+    color: #333; 
 }
 
 body.dark-mode {
     margin-top: -24px;
-    background-color: #000000; /* Cor de fundo do modo escuro */
-    color: #fff; /* Cor do texto no modo escuro */
+    background-color: #000000; 
+    color: #fff; 
 }
 
 header {
@@ -56,15 +67,14 @@ width: 100%;
     -moz-column-count: 1;
     column-count: 1;
     column-gap: 0;
-    width: 48%; /* Ajuste conforme necessário para a lacuna entre as colunas */
+    width: 48%; 
     margin: 0;
     padding: 0;
 }
 
 .pin {
- float: left
-    flex: 0 0 calc(50% - 10px);*/ /* Duas colunas com um espaçamento de 10px */
-height: 100%;
+    float: left;
+    height: 100%;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
     margin: 2px 3px 2px 2px;
@@ -72,7 +82,6 @@ height: 100%;
 
 .pin.existing {
   position: absolute;
-  /* Adicione as propriedades de posição conforme necessário (top, left, etc.) */
 }
 
 .pin:hover {
@@ -96,10 +105,6 @@ height: 100%;
     margin: 0;
 }
 
-/* Adicione mais estilos conforme necessário */
-
-/* Estilos específicos para o modo escuro */
-
 body.dark-mode header {
     top: 0;
     background-color: #e60023;
@@ -113,9 +118,8 @@ body.dark-mode header {
     font-size: 18px;
     font-family: Great Vibes; 
     margin: 0 0 7px 0; 
-    /*position: sticky;*/
     position: relative;
-    top: 0; /* Ajusta a posição para o topo da janela de visualização */
+    top: 0; 
     z-index: 100; 
     height: 40px;
 }
@@ -142,7 +146,7 @@ body.dark-mode .pin {
 #resultsList {
    font-size: 18px;
   position: absolute;
-  top: 34px; /* Adjust this value based on your design */
+  top: 34px;
   left: 0;
   width: 100%;
   list-style-type: none;
@@ -157,7 +161,7 @@ body.dark-mode .pin {
 }
 
 #softkey {
-  position: sticky;
+  position: fixed;
   bottom: 0;
   width: 100%;
   display: flex;
@@ -177,8 +181,7 @@ body.dark-mode .pin {
 }
 #softkey div
 {
- /* background-color: #4CAF50; /* Defina a cor desejada para o botão */
-  color: #fff; /* Defina a cor desejada para o texto */
+  color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -189,8 +192,7 @@ body.dark-mode .pin {
 
 .softkey div
 {
- /* background-color: #4CAF50; /* Defina a cor desejada para o botão */
-  color: #fff; /* Defina a cor desejada para o texto */
+  color: #fff; 
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -201,6 +203,15 @@ body.dark-mode .pin {
 .softkey-l{
     text-align: left;
     margin-left: 30px;
+}
+
+.right-column {
+    position: relative;
+    bottom: 0;
+}
+.left-column {
+    position: relative;
+    bottom: 0;
 }
 #overlay {
 	    text-align: center;
