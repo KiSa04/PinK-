@@ -1,11 +1,14 @@
 var request;
-let savedCookies, type, ImgUrls, login_data, AllUrls, newWindow, isOK, plsgod, infoH, highlightedIndex = 0,
+var yp = 0;
+let savedCookies, lall, type, ImgUrls, login_data, AllUrls, newWindow, isOK, plsgod, infoH, highlightedIndex = 0,
     leftColumnHeight = 0,
     rightColumnHeight = 0,
     pos = 0,
     AllPins = [],
     cook1 = 0,
     helpme = 0,
+    it = 0,
+    o_ca = 0;
     is_verify = 0,
     possss = 0;
 
@@ -106,7 +109,7 @@ function lolipop(e) {
                 "Accept-Language": "pt-PT,pt;q=0.8,en;q=0.5,en-US;q=0.3",
                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
                 Referer: "https://www.pinterest.pt/",
-                Cookie: cook1[0] + ";" + savedCookies.value.replace(/\s+/g, "")
+                Cookie: cook1[0] + ";" + savedCookies.value.replace(/\s+/g, "").split(';')[0]
             };
             Object.keys(t).forEach((o => {
                 e.setRequestHeader(o, t[o])
@@ -177,6 +180,7 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
     })), e.postMessage("start");
 
     type = t("type");
+    lall = t("lall");
     var o = t("email"),
         n = t("pass"),
         s = localStorage.getItem("dbVersion") || 3;
@@ -230,8 +234,16 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
                                     4 === t.readyState && (401 === t.status || 429 === t.status ? (console.log(t.responseText), indexedDB.deleteDatabase("CookieDB----1"), alert(JSON.parse(t.responseText).message), window.location.href = "register.html") : (console.log(t.status), e(t.getResponseHeader("Set-Cookie") || "")))
                                 }
                                 else{
-                                    4 === t.readyState && (401 === t.status || 429 === t.status ? (console.log(t.responseText), alert(JSON.parse(t.responseText).message), window.location.href = "login.html") : (console.log(t.status), indexedDB.deleteDatabase("CookieDB----1"), window.location.href = `kinterest-index.html?v=1&?${login_data}`))
-                                }
+					//if (it == 0)
+					//{
+					// 	 it = 1;
+						 console.log(login_data.replace("username_or_email", "email").replace("password", "pass"));
+						 4 === t.readyState && (401 === t.status || 429 === t.status ? (console.log(t.responseText), alert(JSON.parse(t.responseText).message), window.location.href = "login.html") : (console.log(t.status), o_ca = 1, indexedDB.deleteDatabase("CookieDB----1"), window.location.href = `kinterest-index.html?v=1&${login_data.replace("username_or_email", "email").replace("password", "pass")}&lall=1`))
+        				//}            
+					//else {
+					//	4 === t.readyState && (401 === t.status || 429 === t.status ? (console.log(t.responseText), alert(JSON.parse(t.responseText).message), window.location.href = "login.html") : (console.log(t.status)))
+					//}            
+	}
                             }, t.send(i)
                         }
                     }, s.send(r)
@@ -266,7 +278,110 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
             }), o.oncomplete = function() {
                 console.log('Dados adicionados à store "Cookies" com sucesso.'), window.location.href = "kinterest-index.html"
             }
-        })))) : window.location.href = "register.html"
+        })))) :  window.location.href = `kinterest-index.html?v=1&${login_data}`
+    }, request.onsuccess = function(e) {
+        console.log("Banco de dados aberto com sucesso."),
+            function() {
+                try {
+                    var e = request.result.transaction("Cookies", "readonly").objectStore("Cookies").openCursor();
+                    e.onsuccess = function(e) {
+                        var t = e.target.result;
+                        if (t) {
+                            console.log('Valor encontrado na store "Cookies":', t.value), savedCookies = t.value;
+                            var o = {
+                                    Pragma: "no-cache",
+                                    Accept: "*/*",
+                                    "Accept-Language": "pt-PT,pt;q=0.8,en;q=0.5,en-US;q=0.3",
+                                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                                    Referer: "https://www.pinterest.pt/",
+									"Sec-Ch-Ua": "Not A(Brand\";v=\"99\", \"Brave\";v=\"121\", \"Chromium\";v=\"121",
+									"Sec-Ch-Ua-Mobile": "?0",
+									"Sec-Ch-Ua-Model": "",
+									"Sec-Ch-Ua-Platform": "Windows",
+									"Sec-Ch-Ua-Platform-Version": "10.0.0",
+									"Sec-Fetch-Dest": "document",
+									"Sec-Fetch-Mode": "navigate",
+									"Sec-Fetch-Site": "none",
+									"Sec-Fetch-User": "?1",
+									"Sec-Gpc": "1",
+									"Service-Worker-Navigation-Preload": "true",
+									"Upgrade-Insecure-Requests": "1",
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.3"
+                                },
+                                n = new XMLHttpRequest({
+                                    mozSystem: !0
+                                });
+                            n.open("GET", "https://www.pinterest.pt/resource/UserHomefeedResource/get/"), Object.keys(o).forEach((e => {
+                                n.setRequestHeader(e, o[e])
+                            }));
+                            let e = savedCookies.value.replace(/\s+/g, "").split(';')[0];
+                            n.setRequestHeader("Cookie", e), n.onreadystatechange = function() {
+                                if (n.readyState === XMLHttpRequest.DONE)
+                                    if (200 === n.status) {
+                                        cook1 = (n.getResponseHeader("Set-Cookie") || "").match(/csrftoken=([^;]+)/);
+                                        let e = JSON.parse(n.responseText);
+                                        AllPins = e.resource_response.data.map((function(e) {
+                                            return e.id
+                                        })), AllUrls = ImgUrls = e.resource_response.data.map((function(e) {
+                                            return e.images["170x"].url
+                                        })), console.log(ImgUrls.length), a(), setTimeout((function() {
+                                            a()
+                                        }), 2e3), setTimeout((function() {
+                                            a()
+                                        }), 4e3)
+                                    } else console.error("Erro na solicitação:", n.status, n.statusText, n.responseText)
+                            }, n.send()
+                        } else console.log('Nenhum valor encontrado na store "Cookies".'), r((function(e) {
+                            console.log("2"), db.transaction("Cookies", "readwrite").objectStore("Cookies").put({
+                                id: 1,
+                                value: e
+                            }), console.log("nice")
+                        }))
+                    }, e.onerror = function(e) {
+                        console.error("Erro ao abrir o cursor:", e.target.errorCode)
+                    }
+                } catch (e) {
+		 if (!lall) {
+                    indexedDB.deleteDatabase("CookieDB----1"), console.error('Erro ao acessar a store "Cookies":', e), window.location.href = `register.html`
+			}
+else {
+window.location.href = `kinterest-index.html?v=1&${login_data}&lall=1`
+}
+                }
+            }()
+    }, request.onerror = function(e) {
+        console.error("Erro ao abrir o banco de dados:", e.target.errorCode)
+    };
+    }
+    else{
+        login_data = `username_or_email=${encodeURIComponent(o)}&password=${encodeURIComponent(n)}`;
+		r((function(CARALHO) {
+			(s = 4, localStorage.setItem("dbVersion", s)), (request = indexedDB.open("CookieDB----1", s)).onupgradeneeded = function(e) {
+			var t = e.target.result;
+			console.log("Atualizando o esquema do banco de dados."), t.objectStoreNames.contains("Login") || o ? (t.createObjectStore("Login", {
+				keyPath: "id"
+			}).transaction.oncomplete = function() {
+				console.log('Store "Login" criada com sucesso.');
+				var e = t.transaction(["Login"], "readwrite");
+				e.objectStore("Login").put({
+					id: 1,
+					value: `username_or_email=${encodeURIComponent(o)}&password=${encodeURIComponent(n)}`
+				}), e.oncomplete = function() {
+					console.log('Dados adicionados à store "Login" com sucesso.'), login_data = `username_or_email=${encodeURIComponent(o)}&password=${encodeURIComponent(n)}`
+				}, e.onerror = function(e) {
+					console.error('Erro ao adicionar dados à store "Login":', e.target.errorCode)
+				}
+			}, t.objectStoreNames.contains("Cookies") || (t.createObjectStore("Cookies", {
+				keyPath: "id"
+			}), (function() {
+			var o = t.transaction("Cookies", "readwrite")
+				o.objectStore("Cookies").put({
+					id: 1,
+					value: CARALHO
+				}), o.oncomplete = function() {
+					console.log('Dados adicionados à store "Cookies" com sucesso.'), window.location.href = "kinterest-index.html"
+				}
+        }))) : window.location.href = "login.html"
     }, request.onsuccess = function(e) {
         console.log("Banco de dados aberto com sucesso."),
             function() {
@@ -299,7 +414,7 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
                                         AllPins = e.resource_response.data.map((function(e) {
                                             return e.id
                                         })), AllUrls = ImgUrls = e.resource_response.data.map((function(e) {
-                                            return e.images.orig.url
+                                            return e.images["170x"].url
                                         })), console.log(ImgUrls.length), a(), setTimeout((function() {
                                             a()
                                         }), 2e3), setTimeout((function() {
@@ -317,61 +432,87 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
                         console.error("Erro ao abrir o cursor:", e.target.errorCode)
                     }
                 } catch (e) {
-                    indexedDB.deleteDatabase("CookieDB----1"), console.error('Erro ao acessar a store "Cookies":', e), window.location.href = "register.html"
+                    indexedDB.deleteDatabase("CookieDB----1"), console.error('Erro ao acessar a store "Cookies":', e), window.location.href = "login.html"
                 }
             }()
     }, request.onerror = function(e) {
         console.error("Erro ao abrir o banco de dados:", e.target.errorCode)
     };
-    }
-    else{
-        login_data = `username_or_email=${encodeURIComponent(o)}&password=${encodeURIComponent(n)}`;
-        r();
+}))
     }
     let i, l = document.getElementById("overlay");
 
     function a() {
-        if (ImgUrls.length < 4) {
-            let e = `https://www.pinterest.pt/resource/UserHomefeedResource/get?timestamp=${(new Date).getTime()}`,
-                t = {
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
-                    Pragma: "no-cache",
-                    Accept: "*/*",
-                    "Accept-Language": "pt-PT,pt;q=0.8,en;q=0.5,en-US;q=0.3",
-                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-                    Referer: "https://www.pinterest.pt/",
-                    Cookie: savedCookies.value.replace(/\s+/g, "")
-                },
-                o = new XMLHttpRequest({
-                    mozSystem: !0
-                });
-            o.open("GET", e), Object.keys(t).forEach((e => {
-                o.setRequestHeader(e, t[e])
-            })), o.onreadystatechange = function() {
-                if (o.readyState === XMLHttpRequest.DONE && 200 === o.status) {
-                    0 == cook1 && (cook1 = (o.getResponseHeader("Set-Cookie") || "").match(/csrftoken=([^;]+)/));
-                    let e = JSON.parse(o.responseText),
-                        t = e.resource_response.data.map((function(e) {
-                            return e.id
-                        })),
-                        n = e.resource_response.data.map((function(e) {
-                            return e.images.orig.url
-                        }));
-                    for (let e = 0; e < n.length; e++) AllUrls.includes(n[e]) ? (t.splice(e, 1), n.splice(e, 1)) : AllUrls.push(n[e]);
-                    ImgUrls.push(...n), AllPins.push(...t), ImgUrls.length < 4 && a()
-                }
-            }, o.send()
-        }
-        d(ImgUrls[0]), ImgUrls.splice(0, 1), d(ImgUrls[0]), ImgUrls.splice(0, 1)
+        if (ImgUrls.length <= 15) {
+			
+			if (ImgUrls.length >= 2) {
+				d(ImgUrls[0]), ImgUrls.splice(0, 1), d(ImgUrls[0]), ImgUrls.splice(0, 1);
+			};	
+			
+			if (yp == 0) {
+				console.log('a');
+				yp = 1;
+				let worker = new Worker("worker.js");
+				
+				worker.postMessage({type: 'load_more', cookies: savedCookies});
+				worker.addEventListener("message", (function(e) {
+					yp = 0;
+					ImgUrls.push(...e.data.AllUrls);
+					AllPins.push(...e.data.ImgUrls);
+				}));
+			}
+           }
+		else {
+        d(ImgUrls[0]), ImgUrls.splice(0, 1), d(ImgUrls[0]), ImgUrls.splice(0, 1);
+		}
     }
 
     function c() {
         return "visible" === document.getElementById("overlay").style.visibility
     }
+	
+	function isInViewport(element) {
+	  var rect = element.getBoundingClientRect();
+	  console.log(rect.bottom);
+	  console.log(rect.top);
+	  return 
+	  (
+		rect.bottom >= -100 &&
+		rect.right >= 0 &&
+		rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+		rect.left <= (window.innerWidth || document.documentElement.clientWidth)
+	  )
+	}
 
+	function lazyLoad() {
+	  var lazyImages = document.querySelectorAll('img[data-src]');
+	  for (var i = 0; i < lazyImages.length; i++) {
+		var img = lazyImages[i];
+		if (isInViewport(img)) {
+			img.src = img.getAttribute('data-src');
+			img.removeAttribute('data-src');
+			img.parentNode.removeAttribute('data-src');
+		}
+      }
+	}
+	
+	var unload = (()=>{
+		document.querySelectorAll('img[type]')[0].src="";
+		document.querySelectorAll('img[type]')[0].removeAttribute('type');
+	})
+	
     function d(e) {
         let t = document.createElement("div");
-        t.classList.add("pin"), t.innerHTML = `<img src="${e}">`, leftColumnHeight <= rightColumnHeight ? (document.querySelector(".left-column").appendChild(t), leftColumnHeight += t.offsetHeight) : (document.querySelector(".right-column").appendChild(t), rightColumnHeight += t.offsetHeight)
+        t.classList.add("pin"), t.innerHTML = `<img type="loaded" src=${e}>`,/* t.setAttribute('src', ''), /*document.querySelector("#pin-container").setAttribute('data-src', ''), */leftColumnHeight <= rightColumnHeight ? (document.querySelector(".left-column").appendChild(t), leftColumnHeight += t.offsetHeight) : (document.querySelector(".right-column").appendChild(t), rightColumnHeight += t.offsetHeight);
+		if (document.querySelectorAll('img').length > 30)
+			for (let i =0; i<Array.from(document.querySelectorAll('img')).indexOf(document.querySelectorAll('.pin.highlight img')[0]); i++)
+				document.querySelectorAll('img')[i].src = "";
+		//	lazyLoad();
+		
+		
+
+		/*let worker = new Worker("worker.js");
+		worker.postMessage({type: 'lazyLoad', imgs: lazyImages});*/
     }
     document.getElementById("pin-container"), document.body.classList.toggle("dark-mode"), document.addEventListener("keydown", (function(e) {
         let t, o;
@@ -400,7 +541,7 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
                     let e;
                     document.addEventListener("keydown", lolipop), e = 0 == pos ? document.querySelectorAll(".left-column .pin img")[highlightedIndex] : document.querySelectorAll(".right-column .pin img")[highlightedIndex];
                     let t = e.src;
-                    l.innerHTML = `<img src="${t}" id="img-amp"><div class="softkey"><div class="softkey-left">\x3c!--Share--\x3e💬</div><div class="softkey-center">📥</div><div class="softkey-right">🚪</div></div>`, l.style.visibility = "visible", document.getElementById("pin-container").style.display = "none", document.getElementById("softkey").style.display = "none", window.scrollTo({
+                    l.innerHTML = `<img src="${t}" id="img-amp"><div class="softkey"><div class="softkey-left">💬</div><div class="softkey-center">📥</div><div class="softkey-right">🚪</div></div>`, l.style.visibility = "visible", document.getElementById("pin-container").style.display = "none", document.getElementById("softkey").style.display = "none", window.scrollTo({
                         top: document.getElementById("head").offsetTop,
                         behavior: "smooth"
                     });
@@ -420,7 +561,7 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
                         "Accept-Language": "pt-PT,pt;q=0.8,en;q=0.5,en-US;q=0.3",
                         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
                         Referer: "https://www.pinterest.pt/",
-                        Cookie: cook1[0] + ";" + savedCookies.value.replace(/\s+/g, "")
+                        Cookie: cook1[0] + ";" + savedCookies.value.replace(/\s+/g, "").split(';')[0]
                     }).forEach((e => {
                         o.setRequestHeader(e, t1[e])
                     })), o.onreadystatechange = function() {
@@ -441,7 +582,7 @@ helpme = Math.max(helpme, 0), window.addEventListener("DOMContentLoaded", (funct
                 }));
                 break;
             case "ArrowRight":
-                0 == pos ? helpme++ : window.location.href = `chat.html?&l=${cook1};${savedCookies.value.replace(/\s+/g,"")}`, c() || (pos = 1, document.querySelectorAll(".left-column .pin")[highlightedIndex].classList.remove("highlight"), document.querySelectorAll(".right-column .pin")[highlightedIndex].classList.add("highlight"), o = (t = document.querySelectorAll(".right-column .pin")[highlightedIndex].offsetTop + document.querySelectorAll(".right-column .pin")[highlightedIndex].offsetHeight / 2) - window.innerHeight / 2, window.scrollTo({
+                0 == pos ? helpme++ : window.location.href = `chat.html?&l=${cook1};${savedCookies.value.replace(/\s+/g,"").split(';')[0]}`, c() || (pos = 1, document.querySelectorAll(".left-column .pin")[highlightedIndex].classList.remove("highlight"), document.querySelectorAll(".right-column .pin")[highlightedIndex].classList.add("highlight"), o = (t = document.querySelectorAll(".right-column .pin")[highlightedIndex].offsetTop + document.querySelectorAll(".right-column .pin")[highlightedIndex].offsetHeight / 2) - window.innerHeight / 2, window.scrollTo({
                     top: o,
                     behavior: "smooth"
                 }));
