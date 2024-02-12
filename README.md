@@ -17,6 +17,7 @@ Current Functions
 
 Fixed
 
+    Slow movement and buggy interface when new requests were done (added a service worker to handle them and reduced image weight)
     Login Redirection: Improved user experience by handling failed logins with a clear error message and redirecting back to the login page.
     URL Parsing: Optimized code efficiency by addressing issues with URL parsing, resulting in a smoother performance with fewer API requests.
     multiple words texts appearing as a single word.
@@ -25,6 +26,7 @@ Fixed
 
 To-Do
 
+    Fix the UI on the Nokia 8k(?)
     Create Boards: Organize your Pins by creating custom boards.
     Search Pins
     Browse User Profiles: Explore other users' profiles 
