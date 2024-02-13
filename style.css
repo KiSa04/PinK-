@@ -139,6 +139,36 @@ body.dark-mode .pin {
    color: black;
 }
 
+.softkey div
+{
+    line-height: 1;
+    bottom: 0;
+  color: #fff; 
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  flex-grow: 1; 
+  font-size: 8vh;
+}
+
+.softkey-center {
+    position: fixed;
+    bottom: 0;
+    right: 30px;
+    left: 30px;
+}
+
+.softkey-right {
+    position: fixed;
+    bottom: 0;
+    right: 30px;
+}
+.softkey-left {
+    position: fixed;
+    bottom: 0;
+    left: 30px;
+}
 .softkey {
   height: 12vh;
   position: fixed;
@@ -147,18 +177,7 @@ body.dark-mode .pin {
   display: flex;
   justify-content: space-around;
   box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.9);
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.softkey div
-{
-  color: #fff; 
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  outline: none;
-  flex-grow: 1; 
-  font-size: 8vh;
+  background-color: rgba(0, 0, 0, 0.55);
 }
 
 #softkey {
@@ -174,8 +193,6 @@ body.dark-mode .pin {
 
 #softkey div
 {
-  position: fixed;
-  bottom: 0;
   color: #fff; 
   border: none;
   border-radius: 4px;
@@ -183,16 +200,22 @@ body.dark-mode .pin {
   outline: none;
   flex-grow: 1; 
   font-size: 8vh;
+  line-height: 1;
 }
 
 .softkey-l{
+    position: fixed;
+    bottom: 0;
     text-align: left;
     left: 30px;
 }
 
 .softkey-r{
+    position: fixed;
+    bottom: 0;
     text-align: left;
     right: 30px;
+    /*! height: 100%; */
 }
 
 .right-column {
